@@ -333,6 +333,27 @@ strong {
   border: none;
 }
 
+.video-modal-credit {
+  background: rgba(5, 12, 24, 0.9);
+  padding: 0.4rem 1rem;
+  font-size: 0.62rem;
+  color: #495670;
+  text-align: right;
+  line-height: 1.4;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.video-modal-credit a {
+  color: #8892b0;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.video-modal-credit a:hover {
+  color: #52b788;
+  text-decoration: underline;
+}
+
 .btn-pledge:hover {
   background: var(--earth-green);
   transform: translateY(-1px);
@@ -821,6 +842,25 @@ strong {
   margin-top: 14px;
   font-style: italic;
   line-height: 1.5;
+}
+
+.video-credit {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  text-align: center;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.video-credit a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.video-credit a:hover {
+  color: var(--green-light);
+  text-decoration: underline;
 }
 
 

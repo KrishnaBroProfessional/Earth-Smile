@@ -13,6 +13,7 @@
  * 10. Smooth-scroll for all anchor links
  * 11. Hero video modal
  * 12. Language switcher (EN / HI / GU)
+ * 13. Eco-Friendly Bags PDF modal on page load
  */
 
 'use strict';
@@ -440,6 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initVideoModal();
   initLangSwitcher();
+  initPdfModal();
 });
 
 
@@ -851,5 +853,42 @@ function initSmoothScroll() {
 
       window.scrollTo({ top, behavior: 'smooth' });
     });
+  });
+}
+
+/* ============================================================
+   13. ECO-FRIENDLY BAGS PDF MODAL
+   ============================================================ */
+function initPdfModal() {
+  const overlay = document.getElementById('pdfModalOverlay');
+  const closeBtn = document.getElementById('pdfModalClose');
+  const dismissBtn = document.getElementById('pdfModalDismiss');
+
+  if (!overlay) return;
+
+  function closeModal() {
+    overlay.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  // Show after a short delay so the page paints first
+  setTimeout(() => {
+    overlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }, 800);
+
+  closeBtn.addEventListener('click', closeModal);
+  dismissBtn.addEventListener('click', closeModal);
+
+  // Close on backdrop click
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !overlay.classList.contains('hidden')) {
+      closeModal();
+    }
   });
 }

@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Earth Smile — The initiative to make Shantigram plastic-free. Join us in the fight against global warming and plastic pollution." />
+  <title>Earth Smile — Make Shantigram Plastic-Free</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- AOS (Animate On Scroll) -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ======================================================
+       NAVIGATION
+  ====================================================== -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo" aria-label="Earth Smile Home">
+        <span class="logo-icon" aria-hidden="true">🌍</span>
+        <span class="logo-text">Earth<span class="accent">Smile</span></span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#whats-happening" data-i18n="nav.happening">What's Happening</a></li>
+        <li><a href="#point-of-no-return" data-i18n="nav.ponr">Point of No Return</a></li>
+        <li><a href="#impact" data-i18n="nav.impact">Impact</a></li>
+        <li><a href="#numbers" data-i18n="nav.numbers">The Numbers</a></li>
+        <li><a href="#initiative" data-i18n="nav.initiative">Initiative</a></li>
+        <li><a href="#team" data-i18n="nav.team">Our Team</a></li>
+        <li><a href="#gallery" data-i18n="nav.gallery">Gallery</a></li>
+        <li><a href="#contact" class="nav-cta" data-i18n="nav.join">Join Us</a></li>
+      </ul>
+
+      <!-- Language Switcher -->
+      <div class="lang-switcher" id="langSwitcher">
+        <button class="lang-btn" id="langBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Select language">
+          <span class="lang-globe" aria-hidden="true">🌐</span>
+          <span class="lang-current" id="langCurrent">EN</span>
+          <span class="lang-chevron" aria-hidden="true">▾</span>
+        </button>
+        <ul class="lang-dropdown" id="langDropdown" role="listbox" aria-label="Language options">
+          <li role="option" data-lang="en"  aria-selected="true" >🇬🇧 English</li>
+          <li role="option" data-lang="hi"  aria-selected="false">🇮🇳 हिन्दी</li>
+          <li role="option" data-lang="gu"  aria-selected="false">🇮🇳 ગુજરાતી</li>
+        </ul>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ======================================================
+       HERO / BANNER
+  ====================================================== -->
+  <section id="hero" class="hero" aria-label="Hero banner">
+    <canvas id="particleCanvas" class="particle-canvas" aria-hidden="true"></canvas>
+
+    <div class="hero-content">
+      <div class="hero-badge" data-aos="fade-down" data-aos-delay="200" data-i18n="hero.badge">
+        🌿 Shantigram Plastic-Free Initiative
+      </div>
+
+      <h1 class="hero-title" data-aos="fade-up" data-aos-delay="400">
+        <span data-i18n="hero.title1">Make Earth</span>
+        <span class="hero-accent" data-i18n="hero.title2">Smile Again</span>
+      </h1>
+
+      <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="600" data-i18n="hero.subtitle">
+        Every piece of plastic we remove is a breath our planet takes freely.<br />
+        Join the movement to restore Shantigram — one action at a time.
+      </p>
+
+      <div class="hero-actions" data-aos="fade-up" data-aos-delay="800">
+        <a href="#initiative" class="btn btn-primary" data-i18n="hero.cta1">Join the Initiative</a>
+        <a href="#whats-happening" class="btn btn-ghost" data-i18n="hero.cta2">See the Crisis</a>
+        <button class="btn btn-play" id="heroPlayBtn" aria-label="Watch hero video with sound">
+          <span class="play-icon" aria-hidden="true">▶</span>
+          <span data-i18n="hero.watch">Watch Video</span>
+        </button>
+      </div>
+
+      <div class="hero-temp-meter" data-aos="fade-up" data-aos-delay="1000" aria-label="Global temperature rise indicator">
+        <span class="temp-label" data-i18n="hero.tempLabel">Global Avg. Temp Rise</span>
+        <div class="temp-bar" role="progressbar" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100">
+          <div class="temp-fill" id="tempFill"></div>
+          <span class="temp-value">+1.5°C</span>
+        </div>
+        <span class="temp-warning">⚠ Tipping point threshold</span>
+      </div>
+    </div>
+
+    <div class="hero-scroll-indicator" aria-hidden="true">
+      <div class="scroll-arrow"></div>
+      <span>Scroll to see the truth</span>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       VIDEO POPUP MODAL
+  ====================================================== -->
+  <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Hero video player" hidden>
+    <div class="video-modal-backdrop" id="videoModalBackdrop"></div>
+    <div class="video-modal-box">
+      <button class="video-modal-close" id="videoModalClose" aria-label="Close video">&times;</button>
+      <div class="video-modal-frame">
+        <iframe
+          id="videoModalIframe"
+          src=""
+          title="Earth Smile — Hero Video"
+          allow="autoplay; encrypted-media; fullscreen"
+          frameborder="0">
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================
+       WHAT'S HAPPENING
+  ====================================================== -->
+  <section id="whats-happening" class="section section--dark" aria-labelledby="happening-title">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-tag" data-i18n="happening.tag">Wake Up Call</span>
+        <h2 class="section-title" id="happening-title">
+          <span data-i18n="happening.title">What's <span class="accent-red">Happening</span> to Our Planet?</span>
+        </h2>
+        <p class="section-desc" data-i18n="happening.desc">
+          The Earth is changing — faster than ever before. Here is what our planet looks like through decades of data.
+        </p>
+      </div>
+
+      <div class="happening-grid">
+        <div class="happening-text">
+          <div class="fact-card" data-aos="fade-right" data-aos-delay="0">
+            <div class="fact-icon" aria-hidden="true">🌡️</div>
+            <h3 data-i18n="fact1.h3">Rising Temperatures</h3>
+            <p data-i18n="fact1.p">The last decade (2011–2020) was the warmest on record. Global average temperatures have already risen <strong>1.1°C</strong> above pre-industrial levels.</p>
+          </div>
+          <div class="fact-card" data-aos="fade-right" data-aos-delay="150">
+            <div class="fact-icon" aria-hidden="true">🧊</div>
+            <h3 data-i18n="fact2.h3">Melting Ice Caps</h3>
+            <p data-i18n="fact2.p">Arctic sea ice is declining at <strong>13% per decade</strong>. At current rates, we could see an ice-free Arctic summer by 2035.</p>
+          </div>
+          <div class="fact-card" data-aos="fade-right" data-aos-delay="300">
+            <div class="fact-icon" aria-hidden="true">🌊</div>
+            <h3 data-i18n="fact3.h3">Rising Sea Levels</h3>
+            <p data-i18n="fact3.p">Global sea levels are rising at <strong>3.6 mm per year</strong>. Coastal cities face existential threats within this century.</p>
+          </div>
+        </div>
+
+        <div class="happening-video" data-aos="fade-left" data-aos-delay="200">
+          <div class="video-wrapper">
+            <div class="video-label">
+              <span class="pulse-dot" aria-hidden="true"></span>
+              <span data-i18n="happening.videoLabel">Real-time: 50 years of global warming</span>
+            </div>
+            <div class="video-container">
+              <iframe
+                src="https://www.youtube.com/embed/LwRTw_7NNJs?autoplay=1&mute=1&controls=0&loop=1&playlist=LwRTw_7NNJs&rel=0&modestbranding=1&playsinline=1"
+                title="What Is Climate Change? Global Warming Explained"
+                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                frameborder="0"
+                loading="eager">
+              </iframe>
+            </div>
+            <p class="video-caption" data-i18n="happening.videoCaption">NASA visualization: Earth's temperature anomalies (1880–2023)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       POINT OF NO RETURN
+  ====================================================== -->
+  <section id="point-of-no-return" class="section section--crisis" aria-labelledby="ponr-title">
+    <div class="container">
+      <div class="ponr-content">
+
+        <div class="ponr-visual" data-aos="zoom-in">
+          <div class="countdown-clock" aria-label="Temperature threshold clock showing 1.5°C">
+            <div class="clock-ring">
+              <svg viewBox="0 0 200 200" class="clock-svg" aria-hidden="true">
+                <defs>
+                  <linearGradient id="clockGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%"   stop-color="#52b788" />
+                    <stop offset="50%"  stop-color="#f4a261" />
+                    <stop offset="100%" stop-color="#e63946" />
+                  </linearGradient>
+                </defs>
+                <circle cx="100" cy="100" r="90" class="clock-track" />
+                <circle cx="100" cy="100" r="90" class="clock-progress" id="clockProgress" />
+              </svg>
+              <div class="clock-inner">
+                <span class="clock-number">1.5</span>
+                <span class="clock-unit">°C</span>
+                <span class="clock-label" data-i18n="ponr.clockLabel">Threshold</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ponr-text" data-aos="fade-left" data-aos-delay="200">
+          <span class="section-tag danger" data-i18n="ponr.tag">Critical Alert</span>
+          <h2 class="section-title" id="ponr-title">
+            <span data-i18n="ponr.title">The Point of <span class="accent-red">No Return</span></span>
+          </h2>
+          <p data-i18n="ponr.p">Scientists warn that crossing <strong>1.5°C</strong> of warming triggers irreversible feedback loops — amplifying themselves beyond human control.</p>
+
+          <ul class="ponr-list" aria-label="Tipping point consequences">
+            <li>
+              <span class="ponr-dot" aria-hidden="true"></span>
+              <span data-i18n="ponr.li1"><strong>Permafrost Thaw</strong> — releases stored carbon, dramatically accelerating warming</span>
+            </li>
+            <li>
+              <span class="ponr-dot" aria-hidden="true"></span>
+              <span data-i18n="ponr.li2"><strong>Amazon Dieback</strong> — the world's lungs stop absorbing CO₂</span>
+            </li>
+            <li>
+              <span class="ponr-dot" aria-hidden="true"></span>
+              <span data-i18n="ponr.li3"><strong>Ice-Albedo Feedback</strong> — less ice means less solar reflection means more heat</span>
+            </li>
+            <li>
+              <span class="ponr-dot" aria-hidden="true"></span>
+              <span data-i18n="ponr.li4"><strong>Coral Reef Collapse</strong> — marine biodiversity crashes irreversibly</span>
+            </li>
+          </ul>
+
+          <div class="ponr-current" aria-label="Current global temperature rise: 1.48°C and rising">
+            <span class="current-label" data-i18n="ponr.currentLabel">We are currently at</span>
+            <span class="current-value">+1.48°C</span>
+            <span class="current-sublabel" data-i18n="ponr.currentSublabel">and rising</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       IMPACT OF GLOBAL WARMING
+  ====================================================== -->
+  <section id="impact" class="section section--dark" aria-labelledby="impact-title">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-tag" data-i18n="impact.tag">The Consequences</span>
+        <h2 class="section-title" id="impact-title">
+          <span data-i18n="impact.title">Impact of <span class="accent-orange">Global Warming</span></span>
+        </h2>
+        <p class="section-desc" data-i18n="impact.desc">
+          From melting glaciers to extinct species — the consequences are no longer predictions. They are here.
+        </p>
+      </div>
+
+      <div class="impact-grid">
+        <div class="impact-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="impact-icon" aria-hidden="true">🌪️</div>
+          <h3 data-i18n="impact1.h3">Extreme Weather</h3>
+          <p data-i18n="impact1.p">Hurricanes, droughts, and floods have intensified by 40% in the last two decades, displacing millions annually.</p>
+          <div class="impact-meter" role="progressbar" aria-label="Severity 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+            <div class="impact-fill" style="--fill: 85%"></div>
+          </div>
+          <span class="impact-pct" data-i18n="impact1.pct">Severity: 85%</span>
+        </div>
+
+        <div class="impact-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="impact-icon" aria-hidden="true">🐾</div>
+          <h3 data-i18n="impact2.h3">Biodiversity Loss</h3>
+          <p data-i18n="impact2.p">Over 1 million species face extinction due to habitat destruction and rapidly changing climate conditions.</p>
+          <div class="impact-meter" role="progressbar" aria-label="Severity 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+            <div class="impact-fill" style="--fill: 70%"></div>
+          </div>
+          <span class="impact-pct" data-i18n="impact2.pct">Severity: 70%</span>
+        </div>
+
+        <div class="impact-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="impact-icon" aria-hidden="true">💧</div>
+          <h3 data-i18n="impact3.h3">Water Scarcity</h3>
+          <p data-i18n="impact3.p">By 2050, up to 5 billion people could face water shortages due to melting glaciers and altered rainfall patterns.</p>
+          <div class="impact-meter" role="progressbar" aria-label="Severity 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100">
+            <div class="impact-fill" style="--fill: 78%"></div>
+          </div>
+          <span class="impact-pct" data-i18n="impact3.pct">Severity: 78%</span>
+        </div>
+
+        <div class="impact-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="impact-icon" aria-hidden="true">🌾</div>
+          <h3 data-i18n="impact4.h3">Food Insecurity</h3>
+          <p data-i18n="impact4.p">Crop yields could decline by 25% by 2050, threatening food security for billions in developing regions.</p>
+          <div class="impact-meter" role="progressbar" aria-label="Severity 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+            <div class="impact-fill" style="--fill: 60%"></div>
+          </div>
+          <span class="impact-pct" data-i18n="impact4.pct">Severity: 60%</span>
+        </div>
+
+        <div class="impact-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="impact-icon" aria-hidden="true">🏥</div>
+          <h3 data-i18n="impact5.h3">Human Health</h3>
+          <p data-i18n="impact5.p">Rising temperatures expand the range of malaria, dengue, and other vector-borne diseases into new regions.</p>
+          <div class="impact-meter" role="progressbar" aria-label="Severity 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
+            <div class="impact-fill" style="--fill: 65%"></div>
+          </div>
+          <span class="impact-pct" data-i18n="impact5.pct">Severity: 65%</span>
+        </div>
+
+        <div class="impact-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="impact-icon" aria-hidden="true">🏙️</div>
+          <h3 data-i18n="impact6.h3">Coastal Cities</h3>
+          <p data-i18n="impact6.p">Mumbai, Miami, Jakarta — over 570 coastal cities face significant flooding risks within 30 years.</p>
+          <div class="impact-meter" role="progressbar" aria-label="Severity 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100">
+            <div class="impact-fill" style="--fill: 72%"></div>
+          </div>
+          <span class="impact-pct" data-i18n="impact6.pct">Severity: 72%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       THE NUMBERS
+  ====================================================== -->
+  <section id="numbers" class="section section--numbers" aria-labelledby="numbers-title">
+    <div class="numbers-bg" aria-hidden="true"></div>
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-tag light" data-i18n="numbers.tag">Hard Facts</span>
+        <h2 class="section-title light" id="numbers-title">
+          <span data-i18n="numbers.title">The <span class="accent-orange">Numbers</span> Don't Lie</span>
+        </h2>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card" data-aos="zoom-in" data-aos-delay="0">
+          <div class="stat-icon" aria-hidden="true">🌡️</div>
+          <div class="stat-number" data-count="422" data-suffix=" ppm" aria-label="422 ppm">0</div>
+          <div class="stat-label" data-i18n="stat1.label">CO₂ Concentration</div>
+          <div class="stat-context" data-i18n="stat1.ctx">Highest in 3 million years</div>
+        </div>
+
+        <div class="stat-card" data-aos="zoom-in" data-aos-delay="120">
+          <div class="stat-icon" aria-hidden="true">♻️</div>
+          <div class="stat-number" data-count="8" data-suffix="M tons" aria-label="8 million tons">0</div>
+          <div class="stat-label" data-i18n="stat2.label">Plastic in Oceans Yearly</div>
+          <div class="stat-context" data-i18n="stat2.ctx">Equivalent to 1 truck/minute</div>
+        </div>
+
+        <div class="stat-card" data-aos="zoom-in" data-aos-delay="240">
+          <div class="stat-icon" aria-hidden="true">🌲</div>
+          <div class="stat-number" data-count="15" data-suffix="B" aria-label="15 billion">0</div>
+          <div class="stat-label" data-i18n="stat3.label">Trees Cut Per Year</div>
+          <div class="stat-context" data-i18n="stat3.ctx">That's 41 million per day</div>
+        </div>
+
+        <div class="stat-card" data-aos="zoom-in" data-aos-delay="360">
+          <div class="stat-icon" aria-hidden="true">🐠</div>
+          <div class="stat-number" data-count="50" data-suffix="%" aria-label="50 percent">0</div>
+          <div class="stat-label" data-i18n="stat4.label">Marine Life Lost Since 1970</div>
+          <div class="stat-context" data-i18n="stat4.ctx">Half of ocean life, gone</div>
+        </div>
+
+        <div class="stat-card" data-aos="zoom-in" data-aos-delay="480">
+          <div class="stat-icon" aria-hidden="true">🕒</div>
+          <div class="stat-number" data-count="12" data-suffix=" years" aria-label="12 years">0</div>
+          <div class="stat-label" data-i18n="stat5.label">To Limit Warming to 1.5°C</div>
+          <div class="stat-context" data-i18n="stat5.ctx">Window is closing fast</div>
+        </div>
+
+        <div class="stat-card stat-card--highlight" data-aos="zoom-in" data-aos-delay="600">
+          <div class="stat-icon" aria-hidden="true">💚</div>
+          <div class="stat-number" data-count="500" data-suffix="+ kg" aria-label="500+ kg">0</div>
+          <div class="stat-label" data-i18n="stat6.label">Plastic Removed by Earth Smile</div>
+          <div class="stat-context" data-i18n="stat6.ctx">And counting — join us!</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       THE INITIATIVE
+  ====================================================== -->
+  <section id="initiative" class="section section--dark" aria-labelledby="initiative-title">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-tag" data-i18n="init.tag">Our Action Plan</span>
+        <h2 class="section-title" id="initiative-title">
+          <span data-i18n="init.title">The <span class="accent-green">Initiative</span></span>
+        </h2>
+        <p class="section-desc" data-i18n="init.desc">
+          Earth Smile is more than awareness — it's a structured, community-driven plan to make Shantigram the model for a plastic-free India.
+        </p>
+      </div>
+
+      <div class="initiative-timeline" role="list">
+        <div class="timeline-item" role="listitem" data-aos="fade-right">
+          <div class="timeline-marker" aria-hidden="true">01</div>
+          <div class="timeline-content">
+            <h3 data-i18n="init1.h3">Community Awareness Drives</h3>
+            <p data-i18n="init1.p">Door-to-door campaigns educating residents about single-use plastic alternatives and their environmental impact on Shantigram’s ecosystem.</p>
+            <span class="timeline-tag" data-i18n="init1.tag">Ongoing</span>
+          </div>
+        </div>
+
+        <div class="timeline-item timeline-item--right" role="listitem" data-aos="fade-left">
+          <div class="timeline-marker" aria-hidden="true">02</div>
+          <div class="timeline-content">
+            <h3 data-i18n="init2.h3">Plastic Collection Points</h3>
+            <p data-i18n="init2.p">Designated collection zones across Shantigram for segregated plastic waste, with verified disposal and recycling partnerships.</p>
+            <span class="timeline-tag" data-i18n="init2.tag">Phase 1</span>
+          </div>
+        </div>
+
+        <div class="timeline-item" role="listitem" data-aos="fade-right">
+          <div class="timeline-marker" aria-hidden="true">03</div>
+          <div class="timeline-content">
+            <h3 data-i18n="init3.h3">School Green Programs</h3>
+            <p data-i18n="init3.p">Integrating environmental education into local schools with hands-on activities, eco-competitions, and sustainability pledges for students.</p>
+            <span class="timeline-tag" data-i18n="init3.tag">Active</span>
+          </div>
+        </div>
+
+        <div class="timeline-item timeline-item--right" role="listitem" data-aos="fade-left">
+          <div class="timeline-marker" aria-hidden="true">04</div>
+          <div class="timeline-content">
+            <h3 data-i18n="init4.h3">Tree Plantation Drives</h3>
+            <p data-i18n="init4.p">Planting native species across Shantigram to restore biodiversity, reduce urban heat islands, and offset local carbon emissions.</p>
+            <span class="timeline-tag" data-i18n="init4.tag">Phase 2</span>
+          </div>
+        </div>
+
+        <div class="timeline-item" role="listitem" data-aos="fade-right">
+          <div class="timeline-marker" aria-hidden="true">05</div>
+          <div class="timeline-content">
+            <h3 data-i18n="init5.h3">Local Business Partnerships</h3>
+            <p data-i18n="init5.p">Partnering with vendors and businesses to transition to eco-friendly packaging and earn certified plastic-free outlet status.</p>
+            <span class="timeline-tag" data-i18n="init5.tag">Upcoming</span>
+          </div>
+        </div>
+
+        <div class="timeline-item timeline-item--right" role="listitem" data-aos="fade-left">
+          <div class="timeline-marker" aria-hidden="true">06</div>
+          <div class="timeline-content">
+            <h3 data-i18n="init6.h3">Zero Waste Shantigram 2027</h3>
+            <p data-i18n="init6.p">Our flagship goal: make Shantigram 100% plastic-free and establish it as a replicable model for communities across India.</p>
+            <span class="timeline-tag goal" data-i18n="init6.tag">Target: 2027</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       MEET OUR TEAM
+  ====================================================== -->
+  <section id="team" class="section section--team" aria-labelledby="team-title">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-tag" data-i18n="team.tag">People Behind the Planet</span>
+        <h2 class="section-title" id="team-title">
+          <span data-i18n="team.title">Meet Our <span class="accent-green">Team</span></span>
+        </h2>
+        <p class="section-desc" data-i18n="team.desc">
+          Passionate individuals united by one mission — to give Earth a reason to smile.
+        </p>
+      </div>
+
+      <div class="team-grid">
+        <!-- Card 1: Founder & Initiative Head -->
+        <div class="team-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="team-avatar" aria-hidden="true">
+            <div class="avatar-placeholder">🌍</div>
+          </div>
+          <h3 class="team-name">Dr. Good Authambha</h3>
+          <span class="team-role" data-i18n="team1.role">Founder &amp; Initiative Head</span>
+          <p class="team-bio" data-i18n="team1.bio">Visionary leader driving the Earth Smile initiative with a deep commitment to restoring Shantigram’s environment for future generations.</p>
+        </div>
+
+        <!-- Card 2: Volunteer -->
+        <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="team-avatar" aria-hidden="true">
+            <div class="avatar-placeholder">🤝</div>
+          </div>
+          <h3 class="team-name">Krishna Gupta</h3>
+          <span class="team-role" data-i18n="team2.role">Volunteer</span>
+          <p class="team-bio" data-i18n="team2.bio">Dedicated volunteer contributing time and energy to ground-level activities, cleanups, and community awareness drives across Shantigram.</p>
+        </div>
+
+        <!-- Card 3: Temple Secretary -->
+        <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="team-avatar" aria-hidden="true">
+            <div class="avatar-placeholder">🛕</div>
+          </div>
+          <h3 class="team-name">Rahul Giri</h3>
+          <span class="team-role" data-i18n="team3.role">Temple Secretary</span>
+          <p class="team-bio" data-i18n="team3.bio">Bridges the initiative with the local temple community, mobilising faith-based support and participation for a cleaner, greener Shantigram.</p>
+        </div>
+
+        <!-- Card 4: Join CTA -->
+        <a href="#contact" class="team-card team-card--join" data-aos="fade-up" data-aos-delay="300" aria-label="Join our team or initiative">
+          <div class="team-avatar team-avatar--join" aria-hidden="true">
+            <div class="avatar-placeholder">✨</div>
+          </div>
+          <h3 class="team-name team-name--join" data-i18n="team4.name">Can Be You</h3>
+          <span class="team-role" data-i18n="team4.role">Click Here to Be One</span>
+          <p class="team-bio" data-i18n="team4.bio">Join our mission — become a volunteer, partner or initiative member. Every hand that joins makes Earth smile a little more.</p>
+          <span class="team-join-btn" data-i18n="team4.btn">Join the Initiative →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       GALLERY — TIMELINE OF ACTIVITIES
+  ====================================================== -->
+  <section id="gallery" class="section section--dark" aria-labelledby="gallery-title">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-tag" data-i18n="gallery.tag">Our Journey</span>
+        <h2 class="section-title" id="gallery-title">
+          <span data-i18n="gallery.title">Activity <span class="accent-green">Gallery</span></span>
+        </h2>
+        <p class="section-desc" data-i18n="gallery.desc">
+          A visual timeline of our collective action — every cleanup, every tree, every smile counts.
+        </p>
+      </div>
+
+      <div class="gallery-timeline" role="list">
+        <div class="gallery-item" role="listitem" data-aos="fade-up" data-aos-delay="0">
+          <div class="gallery-date" aria-hidden="true">Jan 2024</div>
+          <div class="gallery-card gallery-card--video">
+            <div class="gallery-image">
+              <div class="gallery-video-wrap">
+                <iframe
+                  src="https://www.youtube.com/embed/iO3SA4YyEYU?rel=0&modestbranding=1"
+                  title="Shantigram Riverbank Cleanup Drive"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  loading="lazy">
+                </iframe>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <h4 data-i18n="g1.h4">Shantigram Riverbank Cleanup Drive</h4>
+              <p data-i18n="g1.p">200+ volunteers came together and collected 120 kg of plastic waste from the riverbank in a single day.</p>
+              <span class="gallery-tag" data-i18n="g1.tag">120 kg removed</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item" role="listitem" data-aos="fade-up" data-aos-delay="80">
+          <div class="gallery-date" aria-hidden="true">Mar 2024</div>
+          <div class="gallery-card gallery-card--video">
+            <div class="gallery-image">
+              <div class="gallery-video-wrap">
+                <iframe
+                  src="https://www.youtube.com/embed/6-FaYliJmdw?rel=0&modestbranding=1"
+                  title="1000 Trees for Shantigram"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  loading="lazy">
+                </iframe>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <h4 data-i18n="g2.h4">1000 Trees for Shantigram</h4>
+              <p data-i18n="g2.p">Native species planted across 5 localities in collaboration with the Gujarat Forest Department.</p>
+              <span class="gallery-tag" data-i18n="g2.tag">1,000 trees planted</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item" role="listitem" data-aos="fade-up" data-aos-delay="160">
+          <div class="gallery-date" aria-hidden="true">Jun 2024</div>
+          <div class="gallery-card gallery-card--video">
+            <div class="gallery-image">
+              <div class="gallery-video-wrap">
+                <iframe
+                  src="https://www.youtube.com/embed/Yk9vt-r0Kfo?rel=0&modestbranding=1"
+                  title="Green Scholars School Program"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  loading="lazy">
+                </iframe>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <h4 data-i18n="g3.h4">Green Scholars School Program</h4>
+              <p data-i18n="g3.p">Environmental curriculum launched in 12 schools, reaching over 3,500 students with hands-on sustainability activities.</p>
+              <span class="gallery-tag" data-i18n="g3.tag">12 schools reached</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item" role="listitem" data-aos="fade-up" data-aos-delay="240">
+          <div class="gallery-date" aria-hidden="true">Oct 2024</div>
+          <div class="gallery-card gallery-card--video">
+            <div class="gallery-image">
+              <div class="gallery-video-wrap">
+                <iframe
+                  src="https://www.youtube.com/embed/NyaCUc3kmFs?rel=0&modestbranding=1"
+                  title="Plastic-Free Business Pledge"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  loading="lazy">
+                </iframe>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <h4 data-i18n="g4.h4">Plastic-Free Business Pledge</h4>
+              <p data-i18n="g4.p">85 local businesses signed the plastic-free pledge, committing to biodegradable alternatives across their operations.</p>
+              <span class="gallery-tag" data-i18n="g4.tag">85 businesses</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-item" role="listitem" data-aos="fade-up" data-aos-delay="320">
+          <div class="gallery-date" aria-hidden="true">Jan 2025</div>
+          <div class="gallery-card">
+            <div class="gallery-image">
+              <div class="gallery-placeholder">
+                <span aria-hidden="true">🎉</span>
+                <p data-i18n="g5.placeholder">1-Year Milestone</p>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <h4 data-i18n="g5.h4">One Year — One Ton of Plastic Removed</h4>
+              <p data-i18n="g5.p">Earth Smile crossed the 1,000 kg milestone. A celebration, a renewed pledge, and a bigger vision for 2025.</p>
+              <span class="gallery-tag" data-i18n="g5.tag">1,000+ kg milestone</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       CONTACT US
+  ====================================================== -->
+  <section id="contact" class="section section--contact" aria-labelledby="contact-title">
+    <div class="container">
+      <div class="contact-wrapper">
+
+        <div class="contact-info" data-aos="fade-right">
+          <span class="section-tag" data-i18n="contact.tag">Get Involved</span>
+          <h2 class="section-title" id="contact-title">
+            <span data-i18n="contact.title">Join the <span class="accent-green">Movement</span></span>
+          </h2>
+          <p data-i18n="contact.p">Whether you want to volunteer, partner, or simply spread the word — every action counts. Reach out and let’s make Shantigram smile together.</p>
+
+          <div class="contact-details">
+            <div class="contact-item">
+              <span class="contact-icon" aria-hidden="true">📍</span>
+              <div>
+                <strong data-i18n="contact.locLabel">Location</strong>
+                <p>Shantigram, Ahmedabad, Gujarat, India</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon" aria-hidden="true">📧</span>
+              <div>
+                <strong data-i18n="contact.emailLabel">Email</strong>
+                <p>hello@earthsmile.in</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon" aria-hidden="true">📱</span>
+              <div>
+                <strong data-i18n="contact.followLabel">Follow Us</strong>
+                <div class="social-links">
+                  <a href="#" class="social-link" aria-label="Instagram">Instagram</a>
+                  <a href="#" class="social-link" aria-label="Facebook">Facebook</a>
+                  <a href="#" class="social-link" aria-label="X / Twitter">X / Twitter</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contactForm" data-aos="fade-left" data-aos-delay="200" novalidate aria-label="Contact form">
+          <div class="form-group">
+            <label for="name" data-i18n="form.nameLabel">Your Name</label>
+            <input type="text" id="name" name="name" data-i18n-ph="form.namePh" placeholder="Aryan Kumar" required autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label for="email" data-i18n="form.emailLabel">Email Address</label>
+            <input type="email" id="email" name="email" data-i18n-ph="form.emailPh" placeholder="you@example.com" required autocomplete="email" />
+          </div>
+          <div class="form-group">
+            <label for="interest" data-i18n="form.interestLabel">I want to</label>
+            <select id="interest" name="interest" required>
+              <option value="" disabled selected data-i18n="form.interestDefault">Select your interest</option>
+              <option value="volunteer" data-i18n="form.opt1">Volunteer for cleanups</option>
+              <option value="donate" data-i18n="form.opt2">Support / Donate</option>
+              <option value="partner" data-i18n="form.opt3">Partner as a business</option>
+              <option value="school" data-i18n="form.opt4">Bring program to my school</option>
+              <option value="media" data-i18n="form.opt5">Media / Press inquiry</option>
+              <option value="other" data-i18n="form.opt6">Something else</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message" data-i18n="form.msgLabel">Message</label>
+            <textarea id="message" name="message" rows="4" data-i18n-ph="form.msgPh" placeholder="Tell us how you'd like to contribute..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" data-i18n="form.submit">Send Message 🌿</button>
+          <p class="form-note" id="formStatus" role="alert" aria-live="polite"></p>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================
+       FOOTER
+  ====================================================== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#hero" class="nav-logo" aria-label="Earth Smile Home">
+            <span class="logo-icon" aria-hidden="true">🌍</span>
+            <span class="logo-text">Earth<span class="accent">Smile</span></span>
+          </a>
+          <p data-i18n="footer.brand">The initiative to make Shantigram plastic-free — and inspire the world to follow.</p>
+          <p class="footer-temp" data-i18n="footer.temp">🌡️ Today’s CO₂: <strong>422 ppm</strong> — Let’s bring it down.</p>
+        </div>
+
+        <div class="footer-links">
+          <h4 data-i18n="footer.sec1">Sections</h4>
+          <ul>
+            <li><a href="#whats-happening" data-i18n="nav.happening">What’s Happening</a></li>
+            <li><a href="#point-of-no-return" data-i18n="nav.ponr">Point of No Return</a></li>
+            <li><a href="#impact" data-i18n="nav.impact">Impact</a></li>
+            <li><a href="#numbers" data-i18n="nav.numbers">The Numbers</a></li>
+            <li><a href="#initiative" data-i18n="init.title2">The Initiative</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links">
+          <h4 data-i18n="footer.sec2">Get Involved</h4>
+          <ul>
+            <li><a href="#team" data-i18n="nav.team">Our Team</a></li>
+            <li><a href="#gallery" data-i18n="nav.gallery">Gallery</a></li>
+            <li><a href="#contact" data-i18n="contact.contactUs">Contact Us</a></li>
+            <li><a href="#contact" data-i18n="footer.volunteer">Volunteer</a></li>
+            <li><a href="#contact" data-i18n="footer.partner">Partner With Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-pledge">
+          <h4 data-i18n="footer.pledgeTitle">Take the Pledge</h4>
+          <p data-i18n="footer.pledgeP">I pledge to reduce my plastic use and protect our planet for future generations.</p>
+          <button class="btn btn-pledge" id="pledgeBtn" aria-label="Take the plastic-free pledge" data-i18n="footer.pledgeBtn">🌿 I Pledge</button>
+          <p class="pledge-count" id="pledgeCount" aria-live="polite" data-i18n="footer.pledgeCount">1,247 people have pledged</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p data-i18n="footer.copy">© 2024 Earth Smile Initiative. Made with 💚 for Shantigram.</p>
+        <p data-i18n="footer.copy2">Built to inspire action, not just awareness.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AOS Script -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <!-- Main JS -->
+  <script src="js/main.js"></script>
+</body>
+</html>
